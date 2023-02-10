@@ -117,7 +117,8 @@ final class Wufoo
                 array_push($formFields, [
                     "FieldTitle" => $formField["Title"],
                     "FieldID" => $formField["ID"],
-                    "FieldType" => $formField["Type"]
+                    "FieldType" => $formField["Type"],
+                    "SubFields" => isset($formField["SubFields"]) ? $formField["SubFields"] : null
                 ]);
             }
 

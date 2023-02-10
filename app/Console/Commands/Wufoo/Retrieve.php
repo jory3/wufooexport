@@ -12,6 +12,7 @@ use Helper\LineResponse;
 use Log;
 
 use Services\Wufoo;
+use Services\Report;
 
 
 class Retrieve extends Command
@@ -54,44 +55,82 @@ class Retrieve extends Command
         }
 
         // Create the empty array to hold the forms name and hash value to pull each entry.
-        $formsHash = [];
+        $formsDataSet = [];
 
-        // Get all forms name and hash value
+        // Get all forms name and hash value, fields, entries and status
         foreach ($availableForms['Forms'] as $forms) {
-            array_push($formsHash, [
+            array_push($formsDataSet, [
                 "formName" => $forms["Name"],
                 "formHash" => $forms["Hash"],
                 "formFields" => $wufoo->getFormFields($forms["Hash"]),  // Get all of the form fields.
                 "formEntries" => $wufoo->getFormEntries($forms["Hash"]), // Get all of the form Entries
-                "statusReport" => $this->checkFormStatus($forms["Name"], $forms["Hash"])
+                "statusReport" => $this->setFormStatus($forms["Name"], $forms["Hash"])
             ]);
         };
 
-        foreach ($formsHash as $forms) {
+        // Check that the form doesn't have error status
+        foreach ($formsDataSet as $forms) {
             if ($forms["statusReport"] == "Error") {
                 array_push($errorForms, $forms);
                 Log::critical("Form hash with error => \nName:" . $forms['Name'] . "\nHash: " . $forms['Hash'] . "\nStatus: " . $forms["statusReport"]);
+                $this->errorFormsCount++;
             }
         }
 
         // retrieve form fields.
-        $formsRetrieved = count($formsHash);
+        $formsRetrieved = count($formsDataSet);
 
         // Let the user know forms were pulled successfully.
         $this->info("\nWufoo Retrieve Process - " . $formsRetrieved . " Forms collected successfully......");
 
-        // Each form has their records.
-
-        dd($formsHash);
-
-
-        // for each form an XLSX is generated with header line and data and stored in a local directory
-        // - xlsx is named after form name
+        // Create a report for each form.
+        $this->initReport($formsDataSet);
     }
 
 
 
-    private function checkFormStatus($name, $hash)
+    // Customer method to build the report.
+    private function initReport($formsHash)
+    {
+        // Build the csv file to store the report
+        $filePath = storage_path() . '/app/forms';
+        $vendorName = 'Form-Entries';
+
+
+        // Create a report for each form.
+        foreach ($formsHash as $forms) {
+
+            // - xlsx is named after form name
+            $fileName = $forms["Name"] . "_Form.xlsx";
+
+            $file = "$filePath/$fileName";
+
+            // need a conditional range.
+            $range = 'Z';
+
+            $records = "data";
+            $columnHeaderTitles = "";
+
+            // for each form an XLSX is generated with header line and data and stored in a local directory
+            $reportFile = Report::generate(
+                $records,
+                $columnHeaderTitles,
+                $file,
+                $vendorName,
+                $range
+            );;
+
+            if (!file_exists($reportFile)) {
+                // self::sendErrorMail();
+                echo "File created";
+                return;
+            }
+        }
+
+        $this->info('Daily report generated.');
+    }
+
+    private function setFormStatus($name, $hash)
     {
         if (empty($name) && empty($hash)) {
             return "Error";
