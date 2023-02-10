@@ -6,9 +6,6 @@ namespace App\Console\Commands\Wufoo;
 
 
 use Illuminate\Console\Command;
-use Utilities\Identity;
-use Utilities\SFTPCall;
-use Helper\LineResponse;
 use Log;
 
 use Services\Wufoo;
@@ -83,6 +80,8 @@ class Retrieve extends Command
         // Let the user know forms were pulled successfully.
         $this->info("\nWufoo Retrieve Process - " . $formsRetrieved . " Forms collected successfully......");
 
+        // Let the user know form report are starting.
+        $this->info("\nWufoo Report Process - Starting process......");
         // Create a report for each form.
         $this->initReport($formsDataSet);
     }
@@ -101,9 +100,11 @@ class Retrieve extends Command
         foreach ($formsHash as $forms) {
 
             // - xlsx is named after form name
-            $fileName = $forms["Name"] . "_Form.xlsx";
+            $fileName = str_replace(' ', '_', $forms["formName"] . "_Form.xlsx");
 
             $file = "$filePath/$fileName";
+
+            echo $file;
 
             // need a conditional range.
             $range = 'Z';
