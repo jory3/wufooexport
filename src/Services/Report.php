@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Report;
+namespace Services;
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet as PHPSpreadSheet;
@@ -31,7 +31,7 @@ final class Report
         $spreadsheet->getProperties()
             ->setCreator('Ryser Media')
             ->setLastModifiedBy('Ryser Media')
-            ->setTitle('Report')
+            ->setTitle($vendorName . "Report")
             ->setSubject($vendorName)
             ->setDescription($vendorName)
             ->setKeywords($vendorName)
