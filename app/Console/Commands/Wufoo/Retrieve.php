@@ -62,6 +62,7 @@ class Retrieve extends Command
                 "formName" => $forms["Name"],
                 "formHash" => $forms["Hash"],
                 "formFields" => $wufoo->getFormFields($forms["Hash"]),  // Get all of the form fields.
+                "formEntries" => $wufoo->getFormEntries($forms["Hash"]), // Get all of the form Entries
                 "statusReport" => $this->checkFormStatus($forms["Name"], $forms["Hash"])
             ]);
         };
@@ -72,7 +73,6 @@ class Retrieve extends Command
                 Log::critical("Form hash with error => \nName:" . $forms['Name'] . "\nHash: " . $forms['Hash'] . "\nStatus: " . $forms["statusReport"]);
             }
         }
-
 
         // retrieve form fields.
         $formsRetrieved = count($formsHash);

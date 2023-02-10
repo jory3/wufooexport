@@ -57,7 +57,7 @@ final class Wufoo
         }
     }
 
-    public function getEntries($hash)
+    public function getFormEntries($hash)
     {
         try {
             $curl = curl_init("https://$this->subDomain.wufoo.com/api/v3/forms/$hash/entries.json");
@@ -114,7 +114,11 @@ final class Wufoo
 
             // Get only the title of the fields.
             foreach ($jsonResponse["Fields"] as $formField) {
-                array_push($formFields, $formField["Title"]);
+                array_push($formFields, [
+                    "FieldTitle" => $formField["Title"],
+                    "FieldID" => $formField["ID"],
+                    "FieldType" => $formField["Type"]
+                ]);
             }
 
             if (!isset($formFields)) {
