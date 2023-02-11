@@ -40,145 +40,291 @@ class Retrieve extends Command
                 "formName" => "Another Form",
                 "formHash" => "m13e7xuh1dfgnx8",
                 "formFields" => [
+
                     [
                         "FieldTitle" => "Entry Id",
-                        "FieldID" => "EntryId",
                         "FieldType" => "text",
-                        "SubFields" => null
+                        "FieldID" => "EntryId"
                     ],
                     [
-                        "FieldTitle" => "field #1",
-                        "FieldID" => "Field1",
-                        "FieldType" => "text",
-                        "SubFields" => null,
+                        "FieldTitle" => "Name",
+                        "Instructions" => "",
+                        "IsRequired" => "1",
+                        "ClassNames" => "",
+                        "DefaultVal" => "",
+                        "Page" => "1",
+                        "SubFields" => [
+                            [
+                                "DefaultVal" => "",
+                                "ID" => "Field1",
+                                "Label" => "First"
+                            ],
+                            [
+                                "DefaultVal" => "",
+                                "ID" => "Field2",
+                                "Label" => "Last"
+                            ]
+                        ],
+                        "FieldType" => "shortname",
+                        "FieldID" => "Field1"
                     ],
                     [
-                        "FieldTitle" => "Select a Choice",
-                        "FieldID" => "Field2",
+                        "FieldTitle" => "Are you able to attend?",
+                        "Instructions" => "",
+                        "IsRequired" => "1",
+                        "ClassNames" => "",
+                        "DefaultVal" => "",
+                        "Page" => "1",
+                        "Choices" => [
+                            [
+                                "Label" => "Yes"
+                            ],
+                            [
+                                "Label" => "No"
+                            ],
+                            [
+                                "Label" => "Not sure"
+                            ]
+                        ],
                         "FieldType" => "radio",
-                        "SubFields" => null,
+                        "FieldID" => "Field3",
+                        "HasOtherField" => false
+                    ],
+                    [
+                        "FieldTitle" => "How many guests will you be bringing? Please write a number below.",
+                        "Instructions" => "",
+                        "IsRequired" => "1",
+                        "ClassNames" => "",
+                        "DefaultVal" => "",
+                        "Page" => "1",
+                        "FieldType" => "number",
+                        "FieldID" => "Field4"
+                    ],
+                    [
+                        "FieldTitle" => "Do you or your guest(s) have any dietary restrictions? Please check all that apply.",
+                        "Instructions" => "",
+                        "IsRequired" => "1",
+                        "ClassNames" => "",
+                        "DefaultVal" => "0",
+                        "Page" => "1",
+                        "SubFields" => [
+                            [
+                                "DefaultVal" => "0",
+                                "ID" => "Field5",
+                                "Label" => "Vegetarian"
+                            ],
+                            [
+                                "DefaultVal" => "0",
+                                "ID" => "Field6",
+                                "Label" => "Vegan"
+                            ],
+                            [
+                                "DefaultVal" => "0",
+                                "ID" => "Field7",
+                                "Label" => "Gluten-free"
+                            ],
+                            [
+                                "DefaultVal" => "0",
+                                "ID" => "Field8",
+                                "Label" => "Dairy-free"
+                            ],
+                            [
+                                "DefaultVal" => "0",
+                                "ID" => "Field9",
+                                "Label" => "None"
+                            ],
+                            [
+                                "DefaultVal" => "0",
+                                "ID" => "Field10",
+                                "Label" => "Other (please elaborate below)"
+                            ]
+                        ],
+                        "FieldType" => "checkbox",
+                        "FieldID" => "Field5"
+                    ],
+                    [
+                        "FieldTitle" => "Please elaborate on any dietary restrictions that apply, or let us know if there's anything else you'd like to tell us. Hope to see you soon!",
+                        "Instructions" => "",
+                        "IsRequired" => "0",
+                        "ClassNames" => "",
+                        "DefaultVal" => "",
+                        "Page" => "1",
+                        "FieldType" => "textarea",
+                        "FieldID" => "Field105"
                     ],
                     [
                         "FieldTitle" => "Date Created",
-                        "FieldID" => "DateCreated",
                         "FieldType" => "date",
-                        "SubFields" => null,
+                        "FieldID" => "DateCreated"
                     ],
                     [
                         "FieldTitle" => "Created By",
-                        "FieldID" => "CreatedBy",
                         "FieldType" => "text",
-                        "SubFields" => null,
+                        "FieldID" => "CreatedBy"
                     ],
                     [
                         "FieldTitle" => "Last Updated",
-                        "FieldID" => "LastUpdated",
                         "FieldType" => "date",
-                        "SubFields" => null,
+                        "FieldID" => "LastUpdated"
                     ],
                     [
                         "FieldTitle" => "Updated By",
-                        "FieldID" => "UpdatedBy",
                         "FieldType" => "text",
-                        "SubFields" => null,
+                        "FieldID" => "UpdatedBy"
                     ]
+
+
                 ],
                 "formEntries" => [
-                    "Entries" =>  [
+                    "Entries" => [
                         [
                             "EntryId" => "1",
-                            "Field1" => "A tester",
-                            "Field2" => "First Choice",
-                            "DateCreated" => "2023-02-09 10:43:13",
+                            "Field1" => "Test",
+                            "Field2" => "Name",
+                            "Field3" => "Yes",
+                            "Field4" => "33",
+                            "Field5" => "Vegetarian",
+                            "Field6" => "Vegan",
+                            "Field7" => "",
+                            "Field8" => "",
+                            "Field9" => "",
+                            "Field10" => "",
+                            "Field105" => "nan",
+                            "DateCreated" => "2023-02-09 10=>41=>50",
                             "CreatedBy" => "public",
                             "DateUpdated" => "",
-                            "UpdatedBy" => null,
+                            "UpdatedBy" => null
                         ],
                         [
                             "EntryId" => "2",
-                            "Field1" => "Me",
-                            "Field2" => "Third Choice",
-                            "DateCreated" => "2023-02-09 10:43:34",
+                            "Field1" => "ewgfw",
+                            "Field2" => "qwergfwio",
+                            "Field3" => "Yes",
+                            "Field4" => "8",
+                            "Field5" => "",
+                            "Field6" => "",
+                            "Field7" => "",
+                            "Field8" => "",
+                            "Field9" => "",
+                            "Field10" => "Other (please elaborate below)",
+                            "Field105" => "A long Text\r\n\r\nwith multiple lines\r\n\r\nis entered \r\n\r\nhere!!",
+                            "DateCreated" => "2023-02-09 10=>42=>16",
                             "CreatedBy" => "public",
                             "DateUpdated" => "",
-                            "UpdatedBy" => null,
-                        ]
-                    ]
-                ],
-                "statusReport" => "Pass",
-            ],
-            [
-                "formName" => "Another Form",
-                "formHash" => "m13e7xuh1dfgnx8",
-                "formFields" => [
-                    [
-                        "FieldTitle" => "Entry Id",
-                        "FieldID" => "EntryId",
-                        "FieldType" => "text",
-                        "SubFields" => null
-                    ],
-                    [
-                        "FieldTitle" => "field #1",
-                        "FieldID" => "Field1",
-                        "FieldType" => "text",
-                        "SubFields" => null,
-                    ],
-                    [
-                        "FieldTitle" => "Select a Choice",
-                        "FieldID" => "Field2",
-                        "FieldType" => "radio",
-                        "SubFields" => null,
-                    ],
-                    [
-                        "FieldTitle" => "Date Created",
-                        "FieldID" => "DateCreated",
-                        "FieldType" => "date",
-                        "SubFields" => null,
-                    ],
-                    [
-                        "FieldTitle" => "Created By",
-                        "FieldID" => "CreatedBy",
-                        "FieldType" => "text",
-                        "SubFields" => null,
-                    ],
-                    [
-                        "FieldTitle" => "Last Updated",
-                        "FieldID" => "LastUpdated",
-                        "FieldType" => "date",
-                        "SubFields" => null,
-                    ],
-                    [
-                        "FieldTitle" => "Updated By",
-                        "FieldID" => "UpdatedBy",
-                        "FieldType" => "text",
-                        "SubFields" => null,
-                    ]
-                ],
-                "formEntries" => [
-                    "Entries" =>  [
-                        [
-                            "EntryId" => "1",
-                            "Field1" => "A tester",
-                            "Field2" => "First Choice",
-                            "DateCreated" => "2023-02-09 10:43:13",
-                            "CreatedBy" => "public",
-                            "DateUpdated" => "",
-                            "UpdatedBy" => null,
+                            "UpdatedBy" => null
                         ],
                         [
-                            "EntryId" => "2",
-                            "Field1" => "Me",
-                            "Field2" => "Third Choice",
-                            "DateCreated" => "2023-02-09 10:43:34",
+                            "EntryId" => "3",
+                            "Field1" => "Testing",
+                            "Field2" => "Form",
+                            "Field3" => "Yes",
+                            "Field4" => "32",
+                            "Field5" => "Vegetarian",
+                            "Field6" => "Vegan",
+                            "Field7" => "Gluten-free",
+                            "Field8" => "Dairy-free",
+                            "Field9" => "",
+                            "Field10" => "",
+                            "Field105" => "This is a great form.",
+                            "DateCreated" => "2023-02-11 02=>47=>17",
                             "CreatedBy" => "public",
                             "DateUpdated" => "",
-                            "UpdatedBy" => null,
+                            "UpdatedBy" => null
                         ]
-                    ]
+                    ],
+
+                    "statusReport" => "Pass",
                 ],
-                "statusReport" => "Pass",
+                [
+                    "formName" => "Another Form",
+                    "formHash" => "m13e7xuh1dfgnx8",
+                    "formFields" => [
+                        [
+                            "FieldTitle" => "Entry Id",
+                            "FieldID" => "EntryId",
+                            "FieldType" => "text",
+                            "SubFields" => null
+                        ],
+                        [
+                            "FieldTitle" => "field #1",
+                            "FieldID" => "Field1",
+                            "FieldType" => "text",
+                            "SubFields" => null,
+                        ],
+                        [
+                            "FieldTitle" => "Select a Choice",
+                            "FieldID" => "Field2",
+                            "FieldType" => "radio",
+                            "SubFields" => null,
+                        ],
+                        [
+                            "FieldTitle" => "Date Created",
+                            "FieldID" => "DateCreated",
+                            "FieldType" => "date",
+                            "SubFields" => [
+                                [
+                                    "DefaultVal" =>  "0",
+                                    "ID" => "Field108",
+                                    "Label" =>  "Check One"
+                                ],
+                                [
+                                    "DefaultVal" =>  "0",
+                                    "ID" =>  "Field109",
+                                    "Label" => "Check Two"
+                                ],
+                                [
+                                    "DefaultVal" =>  "0",
+                                    "ID" =>  "Field110",
+                                    "Label" =>  "Check Three"
+                                ]
+                            ],
+                        ],
+                        [
+                            "FieldTitle" => "Created By",
+                            "FieldID" => "CreatedBy",
+                            "FieldType" => "text",
+                            "SubFields" => null,
+                        ],
+                        [
+                            "FieldTitle" => "Last Updated",
+                            "FieldID" => "LastUpdated",
+                            "FieldType" => "date",
+                            "SubFields" => null,
+                        ],
+                        [
+                            "FieldTitle" => "Updated By",
+                            "FieldID" => "UpdatedBy",
+                            "FieldType" => "text",
+                            "SubFields" => null,
+                        ]
+                    ],
+                    "formEntries" => [
+                        "Entries" =>  [
+                            [
+                                "EntryId" => "1",
+                                "Field1" => "A tester",
+                                "Field2" => "First Choice",
+                                "DateCreated" => "2023-02-09 10=>43=>13",
+                                "CreatedBy" => "public",
+                                "DateUpdated" => "",
+                                "UpdatedBy" => null,
+                            ],
+                            [
+                                "EntryId" => "2",
+                                "Field1" => "Me",
+                                "Field2" => "Third Choice",
+                                "DateCreated" => "2023-02-09 10=>43=>34",
+                                "CreatedBy" => "public",
+                                "DateUpdated" => "",
+                                "UpdatedBy" => null,
+                            ]
+                        ]
+                    ],
+                    "statusReport" => "Pass",
+                ]
             ]
         ];
+
 
 
         $this->info("Wufoo Retrieve Process - Starting process......");
@@ -217,7 +363,7 @@ class Retrieve extends Command
         // foreach ($formsDataSet as $forms) {
         //     if ($forms["statusReport"] == "Error") {
         //         array_push($errorForms, $forms);
-        //         Log::critical("Form hash with error => \nName:" . $forms['Name'] . "\nHash: " . $forms['Hash'] . "\nStatus: " . $forms["statusReport"]);
+        //         Log=>=>critical("Form hash with error => \nName=>" . $forms['Name'] . "\nHash=> " . $forms['Hash'] . "\nStatus=> " . $forms["statusReport"]);
         //         $this->errorFormsCount++;
         //     }
         // }
@@ -231,21 +377,19 @@ class Retrieve extends Command
         // Let the user know form report are starting.
         $this->info("\nWufoo Report Process - Starting process......");
         // Create a report for each form.
+
         // $this->initReport($formsDataSet);
         $this->initReport($testData);
+
+        $this->info("\n\nReports generated.");
     }
 
 
     // Customer method to build the report.
     private function initReport($formsHash)
     {
-        // Build the csv file to store the report
-        if (!file_exists(storage_path() . '/app/forms')) {
-            mkdir(storage_path() . '/app/forms', 0777);
-        }
-        $filePath = storage_path() . '/app/forms';
 
-
+        $filePath = $this->createFormStorage();
 
         // Create a report for each form.
         foreach ($formsHash as $forms) {
@@ -254,33 +398,91 @@ class Retrieve extends Command
             $removeSpaceName = str_replace(" ", "-", $forms["formName"]);
             $vendorName = $removeSpaceName . '_Form-Entries';
             $fileName =  $removeSpaceName . "_Form.xlsx";
+
             $file = "$filePath/$fileName";
+
+            if (file_exists($file)) {
+                srand(time());
+                $randval = rand(1, 1000);
+                $file = str_replace('_Form.xlsx', '_' . $randval . '_Form.xlsx', $file);
+            }
 
             // need a conditional range.
             $range = 'AZ';
 
-            $records = $forms["formEntries"]["Entries"];
+
             $columnHeaderTitles = [];
             foreach ($forms["formFields"] as $formFields) {
                 array_push($columnHeaderTitles, $formFields["FieldTitle"]);
+
+                // Check if there are subfields in the form
+                if (isset($formFields["SubFields"])) {
+
+                    // Create an array for each form field that has subfields 
+                    $subFieldIDs = [];
+
+                    foreach ($formFields["SubFields"] as $subFields) {
+                        array_push($subFieldIDs, $subFields["ID"]);
+                    }
+
+                    // Get all the entries that is apart of the subfields.
+                    foreach ($forms["formEntries"]["Entries"] as $entryLabel) {
+
+                        $tempEntry = [];
+                        // create counter to track the first entry name
+                        $counter = 0;
+                        $firstEntryField = null;
+
+                        foreach ($subFieldIDs as $entryID) {
+                            // Confirm that is in the array of subfields
+                            if (in_array($entryID, $subFieldIDs)) {
+                                if ($counter < 1) {
+                                    $firstEntryField = $entryID;
+                                    $counter++;
+                                }
+                                // push to temp array
+                                array_push($tempEntry, $entryID);
+                            }
+                        }
+                        // Join the values
+                        $multiChoiceEntry = implode(" ", $tempEntry);
+
+                        // Rename the label value 
+                        $forms["formEntries"]["Entries"][$firstEntryField] = $multiChoiceEntry;
+
+                        // remove the other labels from the entry.
+                        if (isset($tempEntry)) {
+
+                            if ($entryLabel !== $firstEntryField && in_array($entryLabel, $tempEntry)) {
+                            }
+                            // unset();
+
+                        }
+
+
+                        //dd($multiChoiceEntry);
+                    }
+                }
             }
+
+            $records = $forms["formEntries"]["Entries"];
+
+            dd($records);
 
             // for each form an XLSX is generated with header line and data and stored in a local directory
-            $reportFile = Report::generate(
-                $records,
-                $columnHeaderTitles,
-                $file,
-                $vendorName,
-                $range
-            );;
+            // $reportFile = Report::generate(
+            //     $records,
+            //     $columnHeaderTitles,
+            //     $file,
+            //     $vendorName,
+            //     $range
+            // );;
 
-            if (!file_exists($reportFile)) {
-                echo "File not created";
-                return;
-            }
+            // if (!file_exists($reportFile)) {
+            //     echo "File not created";
+            //     return;
+            // }
         }
-
-        $this->info("\n\nReports generated.");
     }
 
     private function setFormStatus($name, $hash)
@@ -290,5 +492,14 @@ class Retrieve extends Command
         }
 
         return "Pass";
+    }
+
+    private function createFormStorage()
+    {
+        // Build the csv file to store the report
+        if (!file_exists(storage_path() . '/app/forms')) {
+            mkdir(storage_path() . '/app/forms', 0777);
+        }
+        return storage_path() . '/app/forms';
     }
 }
