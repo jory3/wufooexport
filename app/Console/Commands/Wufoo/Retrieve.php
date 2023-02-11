@@ -382,6 +382,8 @@ class Retrieve extends Command
         //$this->initReport($testData);
 
         $this->info("\n\nReports generated.");
+
+        $this->info("\n\nThere were $this->errorFormsCount forms with errors. {See log for any errors that may occur}");
     }
 
 
