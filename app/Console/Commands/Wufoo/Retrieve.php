@@ -379,7 +379,7 @@ class Retrieve extends Command
         $this->initReport($formsDataSet);
 
         // run the test data.
-        //$this->initReport($testData);
+        // $this->initReport($testData);
 
         $this->info("\n\nReports generated.");
 
@@ -428,12 +428,22 @@ class Retrieve extends Command
 
                     $entryCounter = 0;
                     // Get all the entries that is apart of the subfields.
-                    foreach ($forms["formEntries"]["Entries"] as $entryLabel) {
+                    foreach ($forms["formEntries"]["Entries"] as $entryLabels) {
 
                         $tempEntry = [];
                         // create counter to track the first entry name
                         $counter = 0;
                         $firstEntryField = null;
+
+                        // Check if the there is a  /r (return) or a /n (new line) and remove to add regular space.
+                        foreach ($entryLabels as $tempLabel => $value) {
+
+                            if (isset($value) && (str_contains($value, "\r") || str_contains($value, "\n"))) {
+                                $value = trim(preg_replace('/\s+/', ' ', $value));
+
+                                $forms["formEntries"]["Entries"][$entryCounter][$tempLabel] = $value;
+                            }
+                        }
 
                         foreach ($subFieldIDs as $entryID) {
                             // Confirm that is in the array of subfields
@@ -451,7 +461,7 @@ class Retrieve extends Command
                             $conCatFields = [];
                             // Join the values
                             foreach ($tempEntry as $tempEntryLabel) {
-                                array_push($conCatFields, $entryLabel[$tempEntryLabel]);
+                                array_push($conCatFields, $entryLabels[$tempEntryLabel]);
 
                                 // remove element from the entries array.
                                 if ($tempEntryLabel !== $firstEntryField) {
@@ -461,7 +471,7 @@ class Retrieve extends Command
                             $multiChoiceEntry = implode(" ", $conCatFields);
 
                             // Rename the label value 
-                            $forms["formEntries"]["Entries"][$entryCounter][$firstEntryField] = $multiChoiceEntry;
+                            $forms["formEntries"]["Entries"][$entryCounter][$firstEntryField] = trim($multiChoiceEntry);
                         }
 
                         $entryCounter++;
@@ -470,8 +480,6 @@ class Retrieve extends Command
             }
 
             $records = $forms["formEntries"]["Entries"];
-
-
 
             // for each form an XLSX is generated with header line and data and stored in a local directory
             $reportFile = Report::generate(
