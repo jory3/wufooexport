@@ -398,7 +398,10 @@ class Retrieve extends Command
 
             // - xlsx is named after form name
             $removeSpaceName = str_replace(" ", "-", $forms["formName"]);
-            $vendorName = $removeSpaceName . '_Form-Entries';
+
+            $vendorName = $removeSpaceName . '_Form';
+            $vendorName = strlen($vendorName) >= 31 ? substr($vendorName, 0, 28) . '...' : $vendorName;
+
             $fileName =  $removeSpaceName . "_Form.xlsx";
 
             $file = "$filePath/$fileName";
