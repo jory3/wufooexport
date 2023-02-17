@@ -60,7 +60,7 @@ final class Wufoo
     public function getFormEntries($hash)
     {
         try {
-            $curl = curl_init("https://$this->subDomain.wufoo.com/api/v3/forms/$hash/entries.json");
+            $curl = curl_init("https://$this->subDomain.wufoo.com/api/v3/forms/$hash/entries.json?pageStart=0&pageSize=100");
 
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_USERPWD, $this->apiKey . ":" . $this->password);
@@ -81,7 +81,7 @@ final class Wufoo
             $jsonResponse = json_decode($response, true);
             return $jsonResponse;
         } catch (Exception $error) {
-            Log::critical("There was an error pulling the entries for this form");
+            Log::critical("There was an error pulling the entries for this form " . $error);
         }
     }
 
