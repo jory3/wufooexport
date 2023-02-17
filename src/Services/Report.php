@@ -31,7 +31,7 @@ final class Report
         $spreadsheet->getProperties()
             ->setCreator('Ryser Media')
             ->setLastModifiedBy('Ryser Media')
-            ->setTitle($vendorName . "Report")
+            ->setTitle(substr(preg_replace('/[^A-Za-z0-9]/', '', $vendorName), 0, 31) . "Report")
             ->setSubject($vendorName)
             ->setDescription($vendorName)
             ->setKeywords($vendorName)
@@ -47,8 +47,8 @@ final class Report
             )
         );
 
-        $spreadsheet->addSheet(new WorkSheet($spreadsheet, $vendorName), 0);
-        $spreadsheet->setActiveSheetIndexByName($vendorName);
+        $spreadsheet->addSheet(new WorkSheet($spreadsheet, substr(preg_replace('/[^A-Za-z0-9]/', '', $vendorName), 0, 31)), 0);
+        $spreadsheet->setActiveSheetIndexByName(substr(preg_replace('/[^A-Za-z0-9]/', '', $vendorName), 0, 31));
 
         $columns = range('A', $range);
         foreach ($columns as $column) {

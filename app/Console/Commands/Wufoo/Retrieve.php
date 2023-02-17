@@ -395,9 +395,14 @@ class Retrieve extends Command
 
         // Create a report for each form.
         foreach ($formsHash as $forms) {
+            if(!isset($forms['formFields'])){
+                echo "skipped, no formFields";
+                continue;
+            }
 
             // - xlsx is named after form name
             $removeSpaceName = str_replace(" ", "-", $forms["formName"]);
+            $removeSpaceName = str_replace("/", "", $removeSpaceName);
             $vendorName = $removeSpaceName . '_Form-Entries';
             $fileName =  $removeSpaceName . "_Form.xlsx";
 
@@ -413,13 +418,14 @@ class Retrieve extends Command
             $range = 'AZ';
 
             $columnHeaderTitles = [];
+
             foreach ($forms["formFields"] as $formFields) {
-                array_push($columnHeaderTitles, $formFields["FieldTitle"]);
+                array_push($columnHeaderTitles, substr($formFields["FieldTitle"], 0, 20));
 
                 // Check if there are subfields in the form
                 if (isset($formFields["SubFields"])) {
 
-                    // Create an array for each form field that has subfields 
+                    // Create an array for each form field that has subfields
                     $subFieldIDs = [];
 
                     foreach ($formFields["SubFields"] as $subFields) {
@@ -470,7 +476,7 @@ class Retrieve extends Command
                             }
                             $multiChoiceEntry = implode(" ", $conCatFields);
 
-                            // Rename the label value 
+                            // Rename the label value
                             $forms["formEntries"]["Entries"][$entryCounter][$firstEntryField] = trim($multiChoiceEntry);
                         }
 
