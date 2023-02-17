@@ -404,6 +404,7 @@ class Retrieve extends Command
             $removeSpaceName = str_replace(" ", "-", $forms["formName"]);
             $removeSpaceName = str_replace("/", "", $removeSpaceName);
             $vendorName = $removeSpaceName . '_Form-Entries';
+            $vendorName = strlen($vendorName) >= 31 ? substr($vendorName, 0, 28) . '...' : $vendorName;
             $fileName =  $removeSpaceName . "_Form.xlsx";
 
             $file = "$filePath/$fileName";
@@ -418,7 +419,6 @@ class Retrieve extends Command
             $range = 'AZ';
 
             $columnHeaderTitles = [];
-
             foreach ($forms["formFields"] as $formFields) {
                 array_push($columnHeaderTitles, substr($formFields["FieldTitle"], 0, 20));
 

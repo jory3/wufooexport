@@ -31,7 +31,7 @@ final class Report
         $spreadsheet->getProperties()
             ->setCreator('Ryser Media')
             ->setLastModifiedBy('Ryser Media')
-            ->setTitle(substr(preg_replace('/[^A-Za-z0-9]/', '', $vendorName), 0, 31) . "Report")
+            ->setTitle(substr(preg_replace('/[^A-Za-z0-9]/', '', $vendorName), 0, 31))
             ->setSubject($vendorName)
             ->setDescription($vendorName)
             ->setKeywords($vendorName)
