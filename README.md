@@ -19,4 +19,5 @@ DOMAIN=
 
 ### Author
 
-> Akeem Palmer - Phonics Software Solutions.
+> Akeem Palmer - [Phonics Software Solutions](https://phonicsolutions.com)
+> Jonas Ryser - [Ryser Media](https://rymedia.ch/)
