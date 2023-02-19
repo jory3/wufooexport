@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Services;
 
-use Adamlc\Wufoo\WufooApiWrapper;
-
 use Exception;
 use Log;
 
@@ -22,10 +20,6 @@ final class Wufoo
         $this->subDomain = $subDomain;
         $this->domain = $domain;
         $this->password = $password;
-    }
-
-    public function handle()
-    {
     }
 
     public function getForms()
@@ -59,8 +53,92 @@ final class Wufoo
 
     public function getFormEntries($hash)
     {
+
+        // Create an array for entries
+        $entriesArray = [
+            "Entries" => []
+        ];
+
+        // Get the entry count.
+        $entryCount = $this->getFormEntriesCount($hash);
+
+        if (!isset($entryCount["EntryCount"])) {
+            return;
+        }
+
+        $count = $entryCount["EntryCount"] - 0;
+        if ($hash === "x1tbxgvw1pyr660") {
+            echo $count;
+        }
+
+        if ($count <= 100) {
+            try {
+                $curl = curl_init("https://$this->subDomain.wufoo.com/api/v3/forms/$hash/entries.json?pageStart=0&pageSize=100");
+
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl, CURLOPT_USERPWD, $this->apiKey . ":" . $this->password);
+                curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+                curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+                curl_setopt($curl, CURLOPT_USERAGENT, 'Wufoo Sample Code');
+
+                $response = curl_exec($curl);
+                $resultStatus = curl_getinfo($curl);
+
+                curl_close($curl);
+
+                $jsonResponse = json_decode($response, true);
+
+                // array_push($entriesArray["Entries"], $jsonResponse["Entries"]);
+                $entriesArray["Entries"] = $entriesArray["Entries"] +  $jsonResponse["Entries"];
+            } catch (Exception $error) {
+                Log::critical("There was an error pulling the entries for this form " . $error);
+            }
+        } else {
+            $pageStart = 0;
+            do {
+                try {
+                    $curl = curl_init("https://$this->subDomain.wufoo.com/api/v3/forms/$hash/entries.json?pageStart=$pageStart&pageSize=100");
+
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($curl, CURLOPT_USERPWD, $this->apiKey . ":" . $this->password);
+                    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+                    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+                    curl_setopt($curl, CURLOPT_USERAGENT, 'Wufoo Sample Code');
+
+                    $response = curl_exec($curl);
+                    $resultStatus = curl_getinfo($curl);
+
+                    curl_close($curl);
+
+                    if ($resultStatus['http_code'] != 200) {
+                        echo 'Call Failed ' . print_r($resultStatus);
+                    }
+
+                    $jsonResponse = json_decode($response, true);
+
+                    $entriesArray["Entries"] = array_merge($entriesArray["Entries"], $jsonResponse["Entries"]);
+
+                    // This will get that there is more Entries to pull.
+                    $count = $count - count($jsonResponse["Entries"]);
+                    $count > 0 ? $pageStart = $pageStart + count($jsonResponse["Entries"]) : null;
+                } catch (Exception $error) {
+                    Log::critical("There was an error pulling the entries for this form " . $error);
+                }
+            } while ($count > 0);
+        }
+
+        // echo $count;
+        // var_dump($entriesArray);
+        // dd();
+        return $entriesArray;
+    }
+
+    public function getFormEntriesCount($hash)
+    {
         try {
-            $curl = curl_init("https://$this->subDomain.wufoo.com/api/v3/forms/$hash/entries.json?pageStart=0&pageSize=100");
+            $curl = curl_init("https://$this->subDomain.wufoo.com/api/v3/forms/$hash/entries/count.json");
 
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curl, CURLOPT_USERPWD, $this->apiKey . ":" . $this->password);
@@ -74,12 +152,7 @@ final class Wufoo
 
             curl_close($curl);
 
-            if ($resultStatus['http_code'] != 200) {
-                echo 'Call Failed ' . print_r($resultStatus);
-            }
-
-            $jsonResponse = json_decode($response, true);
-            return $jsonResponse;
+            return json_decode($response, true);
         } catch (Exception $error) {
             Log::critical("There was an error pulling the entries for this form " . $error);
         }

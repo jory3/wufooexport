@@ -37,7 +37,7 @@ class Retrieve extends Command
         // $testData = [
 
         //     [
-        //         "formName" => "Another Form",
+        //         "formName" => "Another FormToTest",
         //         "formHash" => "m13e7xuh1dfgnx8",
         //         "formFields" => [
 
@@ -232,9 +232,8 @@ class Retrieve extends Command
         //                     "UpdatedBy" => null
         //                 ]
         //             ],
-
-        //             "statusReport" => "Pass",
         //         ],
+        //         "statusReport" => "Pass",
         //         [
         //             "formName" => "Another Form",
         //             "formHash" => "m13e7xuh1dfgnx8",
@@ -390,12 +389,11 @@ class Retrieve extends Command
     // Customer method to build the report.
     private function initReport($formsHash)
     {
-
         $filePath = $this->createFormStorage();
 
         // Create a report for each form.
         foreach ($formsHash as $forms) {
-            if(!isset($forms['formFields'])){
+            if (!isset($forms['formFields'])) {
                 echo "skipped, no formFields";
                 continue;
             }
