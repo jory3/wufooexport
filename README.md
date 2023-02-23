@@ -1,6 +1,6 @@
 # Wufoo Data Extraction Script
 
-## Ryser Media
+Extracts data of all Wufoo forms in an account to .xlsx-Files
 
 ### Instruction Set
 
@@ -8,10 +8,11 @@
 
 > Copy the .env.exmaple file renaming it to .env. Change the APIKEY, PASSWORD, and SUBDOMAIN value to your provided account value.
 
+```
 APIKEY=
 PASSWORD=
 SUBDOMAIN=
-DOMAIN=
+```
 
 > Once done, run a { composer install }.
 
